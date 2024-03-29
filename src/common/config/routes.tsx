@@ -1,11 +1,10 @@
-import { RouterProviderProps } from "react-router-dom";
-import RouteTemplate from "../../modules/router-management/templates/route.template";
+import RouteTemplate from '@modules/router-management/templates/route.template'
 
 const ROUTES = [
   {
-    path: "/",
+    path: '/',
     element: <RouteTemplate />,
   },
-];
+]
 
-export default ROUTES;
+export default ROUTES

@@ -6,15 +6,23 @@
     "module": "CommonJS",
     "target": "es5",
     "allowJs": true,
-    "allowUmdGlobalAccess": true
+    "allowUmdGlobalAccess": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["/public/*"],
+      "@modules/*": ["/src/modules/*"],
+      "@common/*": ["/src/common/*"]
+    }
   },
   "files": ["src/index.tsx"],
   "include": [
+    "svg.d.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/**/*.ts",
-    "**/**/*.tsx"
+    "**/**/*.tsx",
+    "**/*.svg"
   ],
   "exclude": ["node_modules"]
 }
