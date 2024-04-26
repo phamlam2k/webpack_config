@@ -35,9 +35,6 @@ const config = {
       React: "react",
     }),
 
-    new BundleAnalyzerPlugin({
-      openAnalyzer: true,
-    }),
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
@@ -89,6 +86,11 @@ module.exports = () => {
     config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
   } else {
     config.mode = "development";
+    config.plugins.push(
+      new BundleAnalyzerPlugin({
+        openAnalyzer: true,
+      })
+    );
   }
   return config;
 };
