@@ -22,9 +22,6 @@ FROM nginx:alpine
 # Sao chép các file tĩnh từ 'builder' stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Ọptional: Thay đổi cấu hình mặc định của Nginx
-COPY ./nginx.conf /etc/nginx/nginx.conf
-
 # Khai báo sử dụng cổng 80
 EXPOSE 80
 
