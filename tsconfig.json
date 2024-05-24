@@ -7,11 +7,15 @@
     "target": "es5",
     "allowJs": true,
     "allowUmdGlobalAccess": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["/public/*"],
       "@modules/*": ["/src/modules/*"],
-      "@common/*": ["/src/common/*"]
+      "@common/*": ["/src/common/*"],
+      "@libs/*": ["/src/libs/*"]
     }
   },
   "files": ["src/index.tsx"],
@@ -22,6 +26,8 @@
     "**/*.tsx",
     "**/**/*.ts",
     "**/**/*.tsx",
+    "**/**/**/*.tsx",
+    "**/**/**/*.ts",
     "**/*.svg"
   ],
   "exclude": ["node_modules"]

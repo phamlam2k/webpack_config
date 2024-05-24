@@ -1,39 +1,40 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
-const { ProvidePlugin } = require("webpack");
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
+const { ProvidePlugin } = require('webpack')
 const BundleAnalyzerPlugin =
-  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-const isProduction = process.env.NODE_ENV == "production";
+const isProduction = process.env.NODE_ENV == 'production'
 
-const stylesHandler = MiniCssExtractPlugin.loader;
+const stylesHandler = MiniCssExtractPlugin.loader
 
 const config = {
-  entry: "./src/index.tsx",
+  entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, 'dist')
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, "public"),
+      directory: path.join(__dirname, 'public')
     },
     compress: true,
     port: 9000,
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
+      template: './public/index.html'
     }),
 
     new MiniCssExtractPlugin(),
 
     new ProvidePlugin({
-      React: "react",
-    }),
+      React: 'react'
+    })
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
@@ -42,55 +43,56 @@ const config = {
     rules: [
       {
         test: /\.(ts|tsx)$/i,
-        use: ["babel-loader", "ts-loader"],
-        exclude: ["/node_modules/"],
+        use: ['babel-loader', 'ts-loader'],
+        exclude: ['/node_modules/']
       },
       {
         test: /\.css$/i,
-        use: [stylesHandler, "css-loader", "postcss-loader"],
+        use: [stylesHandler, 'css-loader', 'postcss-loader']
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: "asset",
+        type: 'asset'
       },
       {
         test: /\.svg$/i,
-        type: "asset",
-        resourceQuery: /url/, // *.svg?url
+        type: 'asset',
+        resourceQuery: /url/ // *.svg?url
       },
       {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
         resourceQuery: { not: [/url/] }, // exclude react component if *.svg?url
-        use: ["@svgr/webpack"],
-      },
+        use: ['@svgr/webpack']
+      }
 
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
-    ],
+    ]
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", "..."],
+    extensions: ['.tsx', '.ts', '.jsx', '.js'],
     alias: {
-      "@modules": path.resolve(__dirname, "src/modules"),
-      "~": path.resolve(__dirname, "public"),
-      "@mui/material": path.resolve(__dirname, "node_modules", "@mui/material"),
-    },
-  },
-};
+      '@modules': path.resolve(__dirname, 'src/modules/'),
+      '@libs': path.resolve(__dirname, 'src/libs/'),
+      '~': path.resolve(__dirname, 'public'),
+      '@mui/material': path.resolve(__dirname, 'node_modules', '@mui/material')
+    }
+  }
+}
 
 module.exports = () => {
   if (isProduction) {
-    config.mode = "production";
+    config.mode = 'production'
 
-    config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
+    config.plugins.push(new WorkboxWebpackPlugin.GenerateSW())
   } else {
-    config.mode = "development";
+    config.mode = 'development'
     config.plugins.push(
       new BundleAnalyzerPlugin({
-        openAnalyzer: true,
+        openAnalyzer: true
       })
-    );
+    )
   }
-  return config;
-};
+  return config
+}
