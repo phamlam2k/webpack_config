@@ -73,10 +73,15 @@ const config = {
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
     alias: {
-      '@modules': path.resolve(__dirname, 'src/modules/'),
-      '@libs': path.resolve(__dirname, 'src/libs/'),
-      '~': path.resolve(__dirname, 'public'),
-      '@mui/material': path.resolve(__dirname, 'node_modules', '@mui/material')
+      ['@modules']: path.resolve(__dirname, './src/modules/'),
+      ['@libs']: path.resolve(__dirname, './src/libs/'),
+      ['~']: path.resolve(__dirname, 'public'),
+      ['@mui/material']: '@mui/material/legacy',
+      '@mui/styled-engine': '@mui/styled-engine/legacy',
+      '@mui/system': '@mui/system/legacy',
+      '@mui/base': '@mui/base/legacy',
+      '@mui/utils': '@mui/utils/legacy',
+      '@mui/lab': '@mui/lab/legacy'
     }
   }
 }
@@ -88,11 +93,11 @@ module.exports = () => {
     config.plugins.push(new WorkboxWebpackPlugin.GenerateSW())
   } else {
     config.mode = 'development'
-    config.plugins.push(
-      new BundleAnalyzerPlugin({
-        openAnalyzer: true
-      })
-    )
+    // config.plugins.push(
+    //   new BundleAnalyzerPlugin({
+    //     openAnalyzer: true
+    //   })
+    // )
   }
   return config
 }

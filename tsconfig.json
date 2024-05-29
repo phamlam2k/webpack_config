@@ -12,10 +12,10 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["/public/*"],
-      "@modules/*": ["/src/modules/*"],
-      "@common/*": ["/src/common/*"],
-      "@libs/*": ["/src/libs/*"]
+      "~/*": ["public/*"],
+      "@modules/*": ["src/modules/*"],
+      "@common/*": ["src/common/*"],
+      "@libs/*": ["src/libs/*"]
     }
   },
   "files": ["src/index.tsx"],

@@ -35,12 +35,17 @@ function Copyright(props: any) {
 const defaultTheme = createTheme()
 
 export default function LoginTemplate() {
+  const [isPending, startTrasition] = React.useTransition()
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
+
+    startTrasition(() => {
+      console.log({
+        email: data.get('email'),
+        password: data.get('password')
+      })
     })
   }
 
@@ -54,8 +59,7 @@ export default function LoginTemplate() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:
-              'url(https://source.unsplash.com/random?wallpapers)',
+            backgroundImage: '',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light'
@@ -116,6 +120,7 @@ export default function LoginTemplate() {
                 fullWidth
                 variant='contained'
                 sx={{ mt: 3, mb: 2 }}
+                disabled={isPending}
               >
                 Sign In
               </Button>
