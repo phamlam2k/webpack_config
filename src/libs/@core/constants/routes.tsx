@@ -1,7 +1,7 @@
-import RouteTemplate from '@modules/router-management/templates/route.template'
 import LoginTemplate from '@modules/auth/templates/login.template'
-import DashboardTemplate from '@modules/dashboard/templates/dashboard.template'
+import DashboardTemplate from '@modules/dashboard/templates/dashboard.layout'
 import { Navigate, RouteObject } from 'react-router-dom'
+import RouteTemplate from '@modules/dashboard/templates/route.template'
 
 const ROUTES: RouteObject[] = [
   {

@@ -1,7 +1,7 @@
 import { AdvancedMarker, Map } from '@vis.gl/react-google-maps'
 import { useEffect, useState } from 'react'
-import Direction from './Direction'
 import Box from '@mui/material/Box'
+import Direction from '@modules/dashboard/components/router-management/Direction'
 // import DeviceIcon from "~/svgs/device.svg";
 
 const latDefault = 21.04669875764942

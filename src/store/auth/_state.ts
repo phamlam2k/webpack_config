@@ -1,9 +1,7 @@
-import { IAuthState } from 'src/types/zustand/auth.type'
+import { IAuthState } from '@type/zustand/auth.type'
 
 export const initialState: Omit<IAuthState, 'login' | 'logout'> = {
   userInfo: null,
-  accessToken: null,
-  refreshToken: null,
   loading: false,
   error: null
 }

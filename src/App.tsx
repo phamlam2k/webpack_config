@@ -1,6 +1,6 @@
+import ROUTES from '@libs/@core/constants/routes'
+import RootProvider from '@libs/@core/providers/RootProvider'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import RootProvider from './common/providers/RootProvider'
-import ROUTES from './common/config/routes'
 
 const routes = createBrowserRouter(ROUTES)
 

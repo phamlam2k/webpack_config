@@ -1,9 +1,10 @@
-import { actions } from 'src/store/auth/_actions'
-import { initialState } from 'src/store/auth/_state'
+import { IAuthState } from '@type/zustand/auth.type'
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
+import { initialState } from './_state'
+import { actions } from './_actions'
 
-const useAuthStore = create(
+const useAuthStore = create<IAuthState>()(
   persist(
     (set) => ({
       ...initialState,
@@ -11,7 +12,7 @@ const useAuthStore = create(
     }),
     {
       name: 'auth-storage',
-      getStorage: () => localStorage
+      storage: createJSONStorage(() => localStorage)
     }
   )
 )

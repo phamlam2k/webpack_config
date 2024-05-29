@@ -12,6 +12,7 @@ import Grid from '@mui/material/Grid'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import useAuthStore from '@store/auth/auth.store'
 
 function Copyright(props: any) {
   return (
@@ -35,17 +36,14 @@ function Copyright(props: any) {
 const defaultTheme = createTheme()
 
 export default function LoginTemplate() {
-  const [isPending, startTrasition] = React.useTransition()
-
+  const { login } = useAuthStore()
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
 
-    startTrasition(() => {
-      console.log({
-        email: data.get('email'),
-        password: data.get('password')
-      })
+    login({
+      account: data.get('email') as string,
+      password: data.get('password') as string
     })
   }
 
@@ -120,7 +118,6 @@ export default function LoginTemplate() {
                 fullWidth
                 variant='contained'
                 sx={{ mt: 3, mb: 2 }}
-                disabled={isPending}
               >
                 Sign In
               </Button>

@@ -1,11 +1,9 @@
-import { ILoginPayload } from 'src/types/apis/auth.type'
+import { ILoginPayload, ILoginResponse } from '@type/apis/auth.type'
 
-export interface IAuthState {
-  userInfo: null
+export type IAuthState = {
+  userInfo: Omit<ILoginResponse, 'token' | 'refreshToken'> | null
   loading: boolean
   error: string | null
-  accessToken: string | null
-  refreshToken: string | null
   login: (data: ILoginPayload) => Promise<void>
   logout: () => void
 }

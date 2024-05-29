@@ -1,9 +1,18 @@
-import axios from 'axios'
+import { domainDefault } from '@libs/@core/constants/env'
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosResponse,
+  InternalAxiosRequestConfig
+} from 'axios'
 
-export const BASE_URL = process.env.NEXT_PUBLIC_ENV_VARIABLE
-
-const axiosServices = axios.create({
-  baseURL: BASE_URL
+const axiosServices: AxiosInstance = axios.create({
+  baseURL: domainDefault,
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  }
 })
 
 axios.interceptors.request.use(
@@ -12,33 +21,31 @@ axios.interceptors.request.use(
       localStorage.getItem('language') || 'en'
     return response
   },
-  (error) =>
-    Promise.reject((error.response && error.response.data) || 'Wrong Services')
+  (error: unknown) => Promise.reject(error)
 )
 
 // interceptor for http
 axiosServices.interceptors.request.use(
-  (response) => {
+  (response: InternalAxiosRequestConfig) => {
     response.headers['Accept-Language'] =
       localStorage.getItem('language') || 'en'
 
-    const accessToken = localStorage.getItem('auth_token')
+    const accessToken = localStorage.getItem('accessToken')
 
     if (accessToken) {
-      response.headers['Authorization'] = `Bearer ${accessToken}`
+      response.headers['Authorization'] = `${accessToken}`
     }
     return response
   },
-  (error) =>
-    Promise.reject((error.response && error.response.data) || 'Wrong Services')
+  (error: unknown) => Promise.reject(error)
 )
 
 axiosServices.interceptors.response.use(
-  (response) => {
+  (response: AxiosResponse) => {
     response.headers['ngonngu'] = 'en'
     return response
   },
-  (error) => {
+  (error: AxiosError) => {
     if (
       error.response &&
       error.response.config.headers['Authorization'] &&

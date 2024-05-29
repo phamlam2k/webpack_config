@@ -1,1 +1,1 @@
-export const domainDefault = process.env.NEXT_PUBLIC_API_URL
+export const domainDefault = process.env.REACT_APP_API_URL

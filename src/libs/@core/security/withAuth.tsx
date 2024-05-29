@@ -1,18 +1,41 @@
-import React from 'react'
+import LoadingLayout from '@libs/@core/components/LoadingLayout'
+import useGetProfileData from '@libs/hooks/useGetProfileData'
+import { ComponentType, FC } from 'react'
 import { Navigate } from 'react-router-dom'
 
-const withAuth = (WrappedComponent: React.ComponentType<any>) => {
-  const ComponentWithAuth = (props: any) => {
-    const authUser = localStorage.getItem('authenticated')
+const withAuth = <P extends object>(
+  WrappedComponent: ComponentType<P>
+): FC<P> => {
+  const ComponentWithAuth: FC<P> = (props) => {
+    const authUser = localStorage.getItem('accessToken')
 
     if (!authUser) {
+      setTimeout(() => {
+        return <Navigate to='/login' />
+      }, 300)
+
+      return <LoadingLayout />
+    }
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { data: useProfile, isLoading } = useGetProfileData()
+
+    console.log({ useProfile })
+
+    if (isLoading) {
+      return <LoadingLayout />
+    }
+
+    if (!useProfile) {
       return <Navigate to='/login' />
     }
 
-    return <WrappedComponent {...props} />
-  }
+    if (authUser && useProfile) {
+      return <WrappedComponent {...(props as P)} />
+    }
 
-  ComponentWithAuth.displayName = `withAuth(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`
+    return <Navigate to='/login' />
+  }
 
   return ComponentWithAuth
 }

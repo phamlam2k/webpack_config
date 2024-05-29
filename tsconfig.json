@@ -15,7 +15,9 @@
       "~/*": ["public/*"],
       "@modules/*": ["src/modules/*"],
       "@common/*": ["src/common/*"],
-      "@libs/*": ["src/libs/*"]
+      "@libs/*": ["src/libs/*"],
+      "@type/*": ["src/types/*"],
+      "@store/*": ["src/store/*"]
     }
   },
   "files": ["src/index.tsx"],
