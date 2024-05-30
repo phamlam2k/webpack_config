@@ -1,27 +1,59 @@
-import LoginTemplate from '@modules/auth/templates/login.template'
-import DashboardTemplate from '@modules/dashboard/templates/dashboard.layout'
-import { Navigate, RouteObject } from 'react-router-dom'
-import RouteTemplate from '@modules/dashboard/templates/route.template'
+import {
+  AuthTemplate,
+  DashboardTemplate,
+  LeafMapTemplate,
+  LoginTemplate,
+  RouteTemplate
+} from '@libs/@core/constants/lazy'
+import { Suspense } from 'react'
+import { Navigate, Route, createRoutesFromElements } from 'react-router-dom'
 
-const ROUTES: RouteObject[] = [
-  {
-    path: '/',
-    element: <DashboardTemplate />,
-    children: [
-      {
-        path: '/',
-        element: <Navigate to='/route' replace />
-      },
-      {
-        path: '/route',
-        element: <RouteTemplate />
+const ROUTES = createRoutesFromElements(
+  <>
+    <Route
+      path='/'
+      element={
+        <Suspense
+          fallback={
+            <p
+              style={{
+                fontSize: 50
+              }}
+            >
+              Loading....
+            </p>
+          }
+        >
+          <DashboardTemplate />
+        </Suspense>
       }
-    ]
-  },
-  {
-    path: '/login',
-    element: <LoginTemplate />
-  }
-]
+    >
+      <Route path='/' element={<Navigate to='/route' replace />} />
+      <Route path='/route' element={<RouteTemplate />} />
+    </Route>
+    <Route
+      path='/auth/'
+      element={
+        <Suspense
+          fallback={
+            <p
+              style={{
+                fontSize: 50
+              }}
+            >
+              Loading....
+            </p>
+          }
+        >
+          <AuthTemplate />
+        </Suspense>
+      }
+    >
+      <Route path='' element={<Navigate to='/auth/login' replace />} />
+      <Route path='login' element={<LoginTemplate />} />
+      <Route path='leafmap' element={<LeafMapTemplate />} />
+    </Route>
+  </>
+)
 
 export default ROUTES

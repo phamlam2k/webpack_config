@@ -1,4 +1,4 @@
-import { handleLogout } from '@libs/utils/auth'
+import { handleLogout } from '@libs/utils/apis/auth'
 import { QueryClient } from '@tanstack/react-query'
 
 export const queryClient = new QueryClient({

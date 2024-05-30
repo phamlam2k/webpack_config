@@ -1,6 +1,6 @@
+import withAuth from '@libs/@core/hocs/withAuth'
 import SideBar from '@libs/@core/layout/SideBar'
 import { Outlet } from 'react-router-dom'
-import withAuth from '@libs/@core/security/withAuth'
 
 const DashboardTemplate = () => {
   return (

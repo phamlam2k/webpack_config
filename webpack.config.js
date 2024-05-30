@@ -6,8 +6,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 const { ProvidePlugin, DefinePlugin } = require('webpack')
 const dotenv = require('dotenv')
-// const BundleAnalyzerPlugin =
-//   require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const isProduction = process.env.NODE_ENV == 'production'
 
@@ -25,7 +25,9 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
 const config = {
   entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, 'dist')
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
   devServer: {
     static: {
@@ -112,11 +114,11 @@ module.exports = () => {
     config.plugins.push(new WorkboxWebpackPlugin.GenerateSW())
   } else {
     config.mode = 'development'
-    // config.plugins.push(
-    //   new BundleAnalyzerPlugin({
-    //     openAnalyzer: true
-    //   })
-    // )
+    config.plugins.push(
+      new BundleAnalyzerPlugin({
+        openAnalyzer: true
+      })
+    )
   }
   return config
 }

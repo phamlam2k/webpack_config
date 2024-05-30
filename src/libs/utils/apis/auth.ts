@@ -10,3 +10,8 @@ export const loginApi = async (
 
   return repsonse.data
 }
+
+export const handleLogout = () => {
+  // window.location.href = '/login'
+  // localStorage.removeItem('auth-storage')
+}
