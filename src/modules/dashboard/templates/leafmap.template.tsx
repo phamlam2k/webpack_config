@@ -1,8 +1,15 @@
+import Helmet from 'react-helmet'
+
 const LeafMapTemplate = () => {
   return (
-    <div>
-      <h1>LeafMap</h1>
-    </div>
+    <>
+      <Helmet>
+        <title>LeafMap Management</title>
+      </Helmet>
+      <div>
+        <h1>LeafMap</h1>
+      </div>
+    </>
   )
 }
 

@@ -1,3 +1,4 @@
+import { ROUTE_LINK } from '@libs/@core/constants/const'
 import {
   AuthTemplate,
   DashboardTemplate,
@@ -28,8 +29,12 @@ const ROUTES = createRoutesFromElements(
         </Suspense>
       }
     >
-      <Route path='/' element={<Navigate to='/route' replace />} />
-      <Route path='/route' element={<RouteTemplate />} />
+      <Route
+        path='/'
+        element={<Navigate to={ROUTE_LINK.GOOGLE_MAP} replace />}
+      />
+      <Route path={ROUTE_LINK.GOOGLE_MAP} element={<RouteTemplate />} />
+      <Route path={ROUTE_LINK.LEAFMAP} element={<LeafMapTemplate />} />
     </Route>
     <Route
       path='/auth/'
@@ -51,7 +56,6 @@ const ROUTES = createRoutesFromElements(
     >
       <Route path='' element={<Navigate to='/auth/login' replace />} />
       <Route path='login' element={<LoginTemplate />} />
-      <Route path='leafmap' element={<LeafMapTemplate />} />
     </Route>
   </>
 )
